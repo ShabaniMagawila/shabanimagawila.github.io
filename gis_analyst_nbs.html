@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Working Experience - Shaban H. Magawila</title>
+<!-- Tailwind CSS CDN for modern styling -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+  }
+  /* Overlay background */
+  #overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9998;
+  }
+  /* Custom styles for buttons */
+  .button {
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  .button:hover {
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<!-- Overlay -->
+<div id="overlay">
+  <div id="popupPanel" class="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-11/12 md:w-3/4 lg:w-2/3 max-w-3xl h-auto max-h-[90vh] overflow-y-auto">
+    <!-- Popup Header -->
+    <div id="popupHeader" class="bg-blue-600 text-white p-4 flex justify-between items-center rounded-t-xl cursor-move" aria-label="Working Experience popup header">
+      <span class="text-xl font-semibold">Working Experience</span>
+      <div class="flex space-x-2">
+        <button class="header-btn hover:bg-blue-700 p-2 rounded-full transition-colors duration-200" onclick="toggleSize()" aria-label="Maximize or restore popup size">
+          <span class="text-white text-lg">&#x26F6;</span>
+        </button>
+        <button class="header-btn hover:bg-blue-700 p-2 rounded-full transition-colors duration-200" onclick="minimizePopup()" aria-label="Minimize or restore popup content">
+          <span class="text-white text-lg">&#x2013;</span>
+        </button>
+        <button class="header-btn hover:bg-red-500 p-2 rounded-full transition-colors duration-200" onclick="closePopup()" aria-label="Close popup">
+          <span class="text-white text-lg">&times;</span>
+        </button>
+      </div>
+    </div>
+    <!-- Popup Content -->
+    <div id="popupContent" class="p-6 flex-grow overflow-y-auto">
+      <h2 class="text-lg font-bold">National Bureau of Statistics (NBS) - GIS Analyst</h2>
+      <p class="mb-2"><strong>Location:</strong> Dodoma, Tanzania</p>
+      <p class="mb-4"><strong>Duration:</strong> June 2023 - Present</p>
+      <p class="mb-4">As a GIS Analyst, my primary responsibilities include:</p>
+      <ul class="list-disc list-inside space-y-1 ml-4">
+        <li>Specializing in GIS and Cartography.</li>
+        <li>Conducting data cleaning and analysis for the 2022 census.</li>
+        <li>Automation for data cleaning using Python, successfully cleaning about 61 million datasets with custom software developed for this purpose. <a href="https://github.com/ShabaniMagawila/NBSCleaning_Tool_v1.2" target="_blank" class="text-blue-500">View on GitHub</a>.</li>
+        <li>Creating a national dashboard to disseminate the 2022 census data using the ArcGIS ecosystem, covering concepts of geodatabase creation and management, as well as dashboard design.</li>
+        <li>Disseminating 2022 census data to various regions in Tanzania including Lindi, Pwani, Iringa, Shinyanga, Singida, Bukoba, Mwanza, Mara, Kigoma, Kilimanjaro, Dodoma, and Tanga.</li>
+        <li>Collaborating with teams to ensure accurate mapping and data integrity.</li>
+        <li>Utilizing various GIS tools and software for data visualization and reporting.</li>
+        <li>Providing insights and recommendations based on spatial data analysis.</li>
+      </ul>
+      <div class="flex space-x-4 mt-6">
+        <a href="https://github.com/ShabaniMagawila/NBSCleaning_Tool_v1.2" target="_blank" rel="noopener noreferrer" class="button bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">View Automation Tool on GitHub</a>
+        <a href="https://drive.google.com/file/d/1bPY00XhfCa5O79K0wvjUEywTsX_FCFIL/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="button bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">Watch Video on Google Drive</a>
+      </div>
+      <a href="https://sites.google.com/view/shaban-magawila" target="_blank" rel="noopener noreferrer" class="button bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full shadow-lg mt-6 inline-block float-right">View Full Portfolio</a>
+      
+      <div class="mt-6">
+        <h3 class="text-lg font-bold">Tags:</h3>
+        <div class="flex flex-wrap mt-2">
+          <span class="inline-block bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2">GIS Analyst</span>
+          <span class="inline-block bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2">Data Cleaning</span>
+          <span class="inline-block bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2">Python Automation</span>
+          <span class="inline-block bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2">ArcGIS</span>
+          <span class="inline-block bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2">Data Analysis</span>
+          <span class="inline-block bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2">Census Data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let isMaximized = false;
+let prevState = { width: '', height: '', top: '', left: '', transform: '' };
+
+function closePopup() {
+  document.getElementById('overlay').style.display = 'none';
+}
+
+function minimizePopup() {
+  const content = document.getElementById('popupContent');
+  content.style.display = (content.style.display === 'none') ? 'block' : 'none';
+}
+
+function toggleSize() {
+  const panel = document.getElementById('popupPanel');
+  if (!isMaximized) {
+    // Save current state
+    prevState.width = panel.style.width;
+    prevState.height = panel.style.height;
+    prevState.top = panel.style.top;
+    prevState.left = panel.style.left;
+    prevState.transform = panel.style.transform;
+    // Maximize
+    panel.style.width = '95%';
+    panel.style.height = '95%';
+    panel.style.top = '2.5%';
+    panel.style.left = '2.5%';
+    panel.style.transform = 'none';
+    isMaximized = true;
+  } else {
+    // Restore
+    panel.style.width = prevState.width || '80%';
+    panel.style.height = prevState.height || '80%';
+    panel.style.top = prevState.top || '50px';
+    panel.style.left = prevState.left || '50%';
+    panel.style.transform = prevState.transform || 'translateX(-50%)';
+    isMaximized = false;
+  }
+}
+
+// Make popup draggable by header
+dragElement(document.getElementById("popupPanel"), document.getElementById("popupHeader"));
+function dragElement(elmnt, header) {
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  header.onmousedown = dragMouseDown;
+  function dragMouseDown(e) {
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+  function elementDrag(e) {
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.transform = "none";
+  }
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
+
+</body>
+</html>
