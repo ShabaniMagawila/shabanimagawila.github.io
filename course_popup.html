@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geospatial Analysis Using R - Course Details</title>
+<!-- Tailwind CSS CDN for modern styling -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+  }
+  /* Overlay background */
+  #overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9998;
+  }
+</style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<!-- Overlay -->
+<div id="overlay">
+  <div id="popupPanel" class="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-11/12 md:w-3/4 lg:w-1/2 max-w-2xl absolute top-12 left-1/2 -translate-x-1/2 z-[9999]">
+    <!-- Popup Header -->
+    <div id="popupHeader" class="bg-blue-600 text-white p-4 flex justify-between items-center rounded-t-xl cursor-move">
+      <span class="text-xl font-semibold">Geospatial Analysis Using R</span>
+      <div class="flex space-x-2">
+        <button class="header-btn hover:bg-blue-700 p-2 rounded-full transition-colors duration-200" onclick="toggleSize()">
+          <span class="text-white text-lg">&#x26F6;</span>
+        </button>
+        <button class="header-btn hover:bg-blue-700 p-2 rounded-full transition-colors duration-200" onclick="minimizePopup()">
+          <span class="text-white text-lg">&#x2013;</span>
+        </button>
+        <button class="header-btn hover:bg-red-500 p-2 rounded-full transition-colors duration-200" onclick="closePopup()">
+          <span class="text-white text-lg">&times;</span>
+        </button>
+      </div>
+    </div>
+    <!-- Popup Content -->
+    <div id="popupContent" class="p-6 flex-grow overflow-y-auto">
+      <p class="mb-2"><strong class="font-bold">Organizer:</strong> National Bureau of Statistics (NBS), Dodoma</p>
+      <p class="mb-4"><strong class="font-bold">Start Date:</strong> 22 May 2025 | <strong class="font-bold">End Date:</strong> 28 May 2025</p>
+      <p class="mb-4">This was a week-long professional training from 22nd to 28th May 2025, focusing on advanced geospatial data analysis using R. The course covered:</p>
+      <ul class="list-disc list-inside space-y-1 ml-4">
+        <li>Spatial data processing in R</li>
+        <li>Geospatial visualization techniques</li>
+        <li>Statistical modeling for spatial datasets</li>
+        <li>Practical GIS and remote sensing applications</li>
+      </ul>
+      <a href="https://drive.google.com/file/d/1u9lBI1DsAqhPZBIMktcluGbxVA55JACK/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-colors duration-300 mt-6 inline-block float-right">Ask for certificate</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// The CSS for the body is now handled by Tailwind classes on the body tag itself.
+let isMaximized = false;
+let prevState = { width: '', height: '', top: '', left: '', transform: '' };
+
+function closePopup() {
+  document.getElementById('overlay').style.display = 'none';
+}
+
+function minimizePopup() {
+  const content = document.getElementById('popupContent');
+  content.style.display = (content.style.display === 'none') ? 'block' : 'none';
+}
+
+function toggleSize() {
+  const panel = document.getElementById('popupPanel');
+  if (!isMaximized) {
+    // Save current state
+    prevState.width = panel.style.width;
+    prevState.height = panel.style.height;
+    prevState.top = panel.style.top;
+    prevState.left = panel.style.left;
+    prevState.transform = panel.style.transform;
+    // Maximize
+    panel.style.width = '95%';
+    panel.style.height = '95%';
+    panel.style.top = '2.5%';
+    panel.style.left = '2.5%';
+    panel.style.transform = 'none';
+    isMaximized = true;
+  } else {
+    // Restore
+    panel.style.width = '80%'; // Note: Setting a default width if none was saved
+    panel.style.height = '80%'; // Note: Setting a default height if none was saved
+    panel.style.top = '50px'; // Note: Setting a default top if none was saved
+    panel.style.left = '50%'; // Note: Setting a default left if none was saved
+    panel.style.transform = 'translateX(-50%)'; // Note: Setting a default transform if none was saved
+    isMaximized = false;
+  }
+}
+
+// The requestCertificate function is no longer needed since the button is now a direct link.
+// Make popup draggable
+dragElement(document.getElementById("popupPanel"), document.getElementById("popupHeader"));
+function dragElement(elmnt, header) {
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  header.onmousedown = dragMouseDown;
+  function dragMouseDown(e) {
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+  function elementDrag(e) {
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.transform = "none";
+  }
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
+
+</body>
+</html>
